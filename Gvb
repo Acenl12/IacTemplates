@@ -1,0 +1,32 @@
+-m tcp --dport 3306 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 3306 -j DROP
+iptables -A INPUT -p tcp -m tcp --dport 5432 -j DROP
+iptables -A INPUT -p udp -m udp --dport 137 -j DROP
+iptables -A INPUT -p udp -m udp --dport 138 -j DROP
+iptables -A INPUT -p tcp -m tcp --dport 139 -j DROP
+iptables -A INPUT -p tcp -m tcp --dport 445 -j DROP
+iptables -A INPUT -s 1.1.1/32 -p udp -m udp --dport 53 -j ACCEPT
+iptables -A INPUT -p udp -m udp --dport 53 -j DROP
+iptables -A INPUT -s 1.1.1/32 -p tcp -m tcp --dport 53 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 53 -j DROP
+iptables -A INPUT -p icmp -m icmp --icmp-type 8/0 -j ACCEPT
+iptables -A INPUT -j DROP
+iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -p tcp -m tcp ! --tcp-flags FIN,SYN,RST,ACK SYN -m state --state NEW -j REJECT --reject-with tcp-reset
+iptables -A FORWARD -m state --state INVALID -j DROP
+iptables -A FORWARD -i lo -o lo -j ACCEPT
+iptables -A FORWARD -j DROP
+iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p tcp -m tcp ! --tcp-flags FIN,SYN,RST,ACK SYN -m state --state NEW -j REJECT --reject-with tcp-reset
+iptables -A OUTPUT -m state --state INVALID -j DROP
+iptables -A OUTPUT -o lo -j ACCEPT
+iptables -A OUTPUT -j ACCEPT
+iptables -A f2b-apache -j RETURN
+iptables -A f2b-modsecurity -j RETURN
+iptables -A f2b-recidive -j RETURN
+iptables -A f2b-BadBots -j RETURN
+iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -p tcp -m tcp ! --tcp-flags FIN,SYN,RST,ACK SYN -m state --state NEW -j REJECT --reject-with tcp-reset
+iptables -A OUTPUT -m state --state INVALID -j DROP
+iptables -A OUTPUT -o lo -j ACCEPT
+iptables -A OUTPUT -j ACCEPT
