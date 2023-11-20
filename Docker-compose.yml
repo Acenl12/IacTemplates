@@ -1,0 +1,22 @@
+version: '2'
+
+services:    
+  app:
+    image: chrisknedel/chaturbate-recorder-gui
+    container_name: recorder_app
+    restart: always
+    environment:
+      TZ: "Europe/Berlin"
+      ABSOLUTE_HOST_MEDIA: "/Users/christianknedel/videos/"
+      LIMIT_MAXIMUM_FOLDER_GB: 20 #or "0" to disable this limit
+      LIMIT_MAXIMUM_DOWNLOADS: 10 #or "0" to disable this limit
+      COMMAND_ADAPTER: 'DockerAdapter'
+      CONTAINER_PREFFIX: 'cr_'
+      RECORDER_IMAGE: 'chrisknedel/chaturbate-recorder'
+      USER_UID: 0
+      USER_GID: 0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /Users/christianknedel/videos:/code/database
+    ports:
+      - "8002:8000"
