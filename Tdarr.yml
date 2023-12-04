@@ -53,12 +53,3 @@ services:
       - /media:/media
       - /transcode_cache:/temp
 
-    devices:
-      - /dev/dri:/dev/dri
-    deploy:
-      resources:
-        reservations:
-          devices:
-          - driver: nvidia
-            count: all
-            capabilities: [gpu]
