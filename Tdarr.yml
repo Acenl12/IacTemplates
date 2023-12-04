@@ -20,8 +20,6 @@ services:
       - inContainer=true
       - ffmpegVersion=6
       - nodeName=MyInternalNode
-      - NVIDIA_DRIVER_CAPABILITIES=all
-      - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - /docker/tdarr/server:/app/server
       - /docker/tdarr/configs:/app/configs
@@ -29,15 +27,7 @@ services:
       - /media:/media
       - /transcode_cache:/temp
 
-    devices:
-      - /dev/dri:/dev/dri
-    deploy:
-      resources:
-        reservations:
-          devices:
-          - driver: nvidia
-            count: all
-            capabilities: [gpu]
+    
     
 
 # node example
@@ -56,8 +46,6 @@ services:
       - serverPort=8266
       - inContainer=true
       - ffmpegVersion=6
-      - NVIDIA_DRIVER_CAPABILITIES=all
-      - NVIDIA_VISIBLE_DEVICES=all
 
     volumes:
       - /docker/tdarr/configs:/app/configs
