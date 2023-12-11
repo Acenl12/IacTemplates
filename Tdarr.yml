@@ -21,9 +21,9 @@ services:
       - ffmpegVersion=6
       - nodeName=MyInternalNode
     volumes:
-      - /docker/tdarr/server:/app/server
-      - /docker/tdarr/configs:/app/configs
-      - /docker/tdarr/logs:/app/logs
+      - /home/azureuser/tdarr2/tdarr/server:/app/server
+      - /home/azureuser/tdarr2/tdarr/configs:/app/configs
+      - /home/azureuser/tdarr2/tdarr/logs:/app/logs
       - /media:/media
       - /transcode_cache:/temp
 
@@ -48,8 +48,8 @@ services:
       - ffmpegVersion=6
 
     volumes:
-      - /docker/tdarr/configs:/app/configs
-      - /docker/tdarr/logs:/app/logs
+      - /home/azureuser/tdarr2/tdarr/configs:/app/configs
+      - /home/azureuser/tdarr2/tdarr/logs:/app/logs
       - /media:/media
       - /transcode_cache:/temp
 
