@@ -24,7 +24,7 @@ services:
       - /nfs/media:/media
       - /nfs/transcode_cache:/temp
 
-tdarr-node:
+ tdarr-node:
     image: haveagitgat/tdarr_node:latest
     container_name: tdarr-node
     restart: unless-stopped
