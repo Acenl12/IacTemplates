@@ -1,0 +1,22 @@
+version: '3'
+services:
+  vpn:
+    image: qmcgaw/gluetun
+    container_name: vpn
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - OPENVPN_USER=mU5W6Fn8h5o1I63M
+      - OPENVPN_PASSWORD=iLeFlLCe0EgivyXBQpU2k219B2TQXkdk
+      - SERVER_COUNTRIES=Netherlands
+      - FREE_ONLY=on
+    networks:
+      - mynetwork
+    ports:
+      - "9091:9091"
+      - "51413:51413"
+      - "51413:51413/udp"
+
+networks:
+  mynetwork:
